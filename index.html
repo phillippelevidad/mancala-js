@@ -1,0 +1,145 @@
+<html>
+<body>
+    <head>
+        <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="style.css" />
+    </head>
+    <div class="container">
+        <div id="scoreBoard" class="row">
+            <div id="player1" class="col-md-4 col-md-offset-2">
+                <span class="player-name">Player 1</span>
+                <span class="player-score"></span>
+            </div>
+            <div id="player2" class="col-md-4">
+                <span class="player-name">Player 2</span>
+                <span class="player-score"></span>
+            </div>
+        </div>
+
+        <div class="row" id="activePlayer">
+            <div class="col-md-12">
+                <span>turn</span>
+                <span class="player-name"></span>
+            </div>
+        </div>
+
+        <div id="mancala" class="row">
+            <div id="h2g" class="kalah p2-holes col-md-1 col-md-offset-2">
+                <div class="panel panel-default">
+                    <span class="seed-count"></span>
+                    <span class="hole-name"></span>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="holes-container p2-holes row">
+                    <div id="h2f" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h2e" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h2d" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h2c" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h2b" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h2a" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="holes-container p1-holes row">
+                    <div id="h1a" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h1b" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h1c" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h1d" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h1e" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                    <div id="h1f" class="hole col-md-2">
+                        <div class="panel panel-default">
+                            <span class="seed-count"></span>
+                            <span class="hole-name"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="h1g" class="kalah p1-holes col-md-1">
+                <div class="panel panel-default">
+                    <span class="seed-count"></span>
+                    <span class="hole-name"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="entities/game.js"></script>
+    <script src="entities/hole.js"></script>
+    <script src="entities/mancala.js"></script>
+    <script src="entities/player.js"></script>
+    <script src="events/gameEndedEvent.js"></script>
+    <script src="events/holeInfosUpdatedEvent.js"></script>
+    <script src="events/holePickedEvent.js"></script>
+    <script src="events/holeVisitedEvent.js"></script>
+    <script src="events/playerTurnSetEvent.js"></script>
+    <script src="events/seedDistributionCompletedEvent.js"></script>
+    <script src="infra/domAdapter.js"></script>
+    <script src="infra/eventHub.js"></script>
+    <script src="app.js"></script>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <script>
+        var app = new App();
+        app.init();
+    </script>
+</body>
+</html>
