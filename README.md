@@ -12,7 +12,7 @@ If I were to write this game before learning about DDD, I'm sure I was going to 
 
 With DDD, it is a lot easier to write short methods that adhere to the Single Responsibility principle, and to add functionality without changing working code through the use of a PubSub system. The real challenge in DDD is understanding and modeling the problem you aim to solve, rather than worrying about software infrastructure.
 
-And I'm finding that DDD can be very simple to implement, as opposed to a lot of people say on the Internet. You just need to be concious about which suggestions of the methodology to follow and which not to, according to the size of the problem and complexity of the solution.
+And I'm finding that DDD can be very simple to implement, as opposed to what a lot of people say on the Internet. You just need to be concious about which suggestions of the methodology to follow and which not to, according to the size of the problem and complexity of the solution.
 
 ## Organization
 Thanks to DDD, I've managed to organize the project "classes" in a way that all the game logic (my business rules, in this case) take place without ever knowing that they're running in a web-browser. The **DomAdapter** class is an infrastructure implementation that captures all business events and translates them to the UI in a very decoupled manner.
