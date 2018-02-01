@@ -15,32 +15,36 @@ App.prototype.init = function () {
     this.game.start();
 };
 
+App.prototype.setupDomAdapter = function () {
+    this.domAdapter.createDomLink();
+};
+
 App.prototype.setupEventHandlers = function () {
     this.eventHub.registerHandler(
-        SeedDistributionCompletedEvent,
-        this.game, 'actOnSeedDistributionCompleted');
-
-    this.eventHub.registerHandler(
-        PlayerTurnSetEvent,
-        this.domAdapter, 'handlePlayerTurnSetEvent');
-
-    this.eventHub.registerHandler(
-        HolePickedEvent,
-        this.game, 'actOnHolePicked');
+        GameEndedEvent,
+        this.domAdapter, 'handleGameEnded');
 
     this.eventHub.registerHandler(
         HoleInfosUpdatedEvent,
         this.domAdapter, 'handleHoleInfosUpdated');
 
     this.eventHub.registerHandler(
+        HolePickedEvent,
+        this.game, 'handleHolePicked');
+    
+    this.eventHub.registerHandler(
+        HoleVisitedEvent,
+        this.domAdapter, 'handleHoleVisited');
+
+    this.eventHub.registerHandler(
+        PlayerTurnSetEvent,
+        this.domAdapter, 'handlePlayerTurnSet');
+
+    this.eventHub.registerHandler(
         SeedDistributionCompletedEvent,
         this.domAdapter, 'handleSeedDistributionCompleted');
 
     this.eventHub.registerHandler(
-        HoleVisitedEvent,
-        this.domAdapter, 'handleHoleVisited');
-};
-
-App.prototype.setupDomAdapter = function () {
-    this.domAdapter.createDomLink();
+        SeedDistributionCompletedEvent,
+        this.game, 'handleSeedDistributionCompleted');
 };

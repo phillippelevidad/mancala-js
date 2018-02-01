@@ -13,9 +13,24 @@ DomAdapter.prototype.createDomLink = function () {
             self.eventHub.publish(new HolePickedEvent(holeId));
         });
     });
+
+    $('#btnNewGame').click(function () {
+        window.location.reload();
+    });
 };
 
-DomAdapter.prototype.handleGameEndedEvent = function (eventData) {
+DomAdapter.prototype.handleGameEnded = function (eventData) {
+    debugger;
+    var endGameStatus = eventData.getEndGameStatus();
+    $('#endGameInfo').show();
+
+    if (endGameStatus.isDraw) {
+        $('#endGameInfo .winner-draw').show();
+    }
+    else {
+        $('#endGameInfo .winner-player').show();
+        $('#endGameInfo .winner-name').text(endGameStatus.winner.name);
+    }
 };
 
 DomAdapter.prototype.handleHoleInfosUpdated = function (eventData) {
@@ -34,7 +49,7 @@ DomAdapter.prototype.handleHoleInfosUpdated = function (eventData) {
     });
 };
 
-DomAdapter.prototype.handlePlayerTurnSetEvent = function (eventData) {
+DomAdapter.prototype.handlePlayerTurnSet = function (eventData) {
     var id = eventData.getActivePlayer().getId();
     var name = eventData.getActivePlayer().getName();
 
@@ -47,16 +62,6 @@ DomAdapter.prototype.handlePlayerTurnSetEvent = function (eventData) {
 
 DomAdapter.prototype.handleSeedDistributionCompleted = function (eventData) {
     this.highlightStep = 1;
-
-    return;
-    var lastVisitedHole = eventData.getLastVisitedHole();
-    var speed = 150;
-
-    window.setTimeout(function () {
-        $('#' + lastVisitedHole.getId())
-            .fadeIn(speed).fadeOut(speed).fadeIn(speed)
-            .fadeOut(speed).fadeIn(speed);
-    }, speed);
 };
 
 DomAdapter.prototype.handleHoleVisited = function (eventData) {

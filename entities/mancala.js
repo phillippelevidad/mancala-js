@@ -1,26 +1,39 @@
 function Mancala(eventHub) {
-    this.eventHub = eventHub;    
+    this.eventHub = eventHub;
+    this.player1Id = null;
+    this.player2Id = null;
 }
 
-Mancala.prototype.arrange = function () {
-    this.player1 = new Player('player1', 'Player 1');
-    this.player2 = new Player('player2', 'Player 2');
+Mancala.prototype.arePlayerHolesEmpty = function (playerId) {
+    var holes = this.getAllHoles();
 
-    this.hole1a = new Hole('h1a', '1A', 'player1', 6, false);
-    this.hole1b = new Hole('h1b', '1B', 'player1', 6, false);
-    this.hole1c = new Hole('h1c', '1C', 'player1', 6, false);
-    this.hole1d = new Hole('h1d', '1D', 'player1', 6, false);
-    this.hole1e = new Hole('h1e', '1E', 'player1', 6, false);
-    this.hole1f = new Hole('h1f', '1F', 'player1', 6, false);
-    this.hole1g = new Hole('h1g', '1G', 'player1', 0, true);
+    for (var i in holes) {
+        if (holes[i].getPlayerId() !== playerId) continue;
+        if (!holes[i].isKalah && holes[i].getSeedCount() > 0) return false;
+    }
 
-    this.hole2a = new Hole('h2a', '2A', 'player2', 6, false);
-    this.hole2b = new Hole('h2b', '2B', 'player2', 6, false);
-    this.hole2c = new Hole('h2c', '2C', 'player2', 6, false);
-    this.hole2d = new Hole('h2d', '2D', 'player2', 6, false);
-    this.hole2e = new Hole('h2e', '2E', 'player2', 6, false);
-    this.hole2f = new Hole('h2f', '2F', 'player2', 6, false);
-    this.hole2g = new Hole('h2g', '2G', 'player2', 0, true);
+    return true;
+};
+
+Mancala.prototype.arrange = function (player1Id, player2Id) {
+    this.player1Id = player1Id;
+    this.player2Id = player2Id;
+
+    this.hole1a = new Hole('h1a', '1A', player1Id, 6, false);
+    this.hole1b = new Hole('h1b', '1B', player1Id, 6, false);
+    this.hole1c = new Hole('h1c', '1C', player1Id, 6, false);
+    this.hole1d = new Hole('h1d', '1D', player1Id, 6, false);
+    this.hole1e = new Hole('h1e', '1E', player1Id, 6, false);
+    this.hole1f = new Hole('h1f', '1F', player1Id, 6, false);
+    this.hole1g = new Hole('h1g', '1G', player1Id, 0, true);
+
+    this.hole2a = new Hole('h2a', '2A', player2Id, 6, false);
+    this.hole2b = new Hole('h2b', '2B', player2Id, 6, false);
+    this.hole2c = new Hole('h2c', '2C', player2Id, 6, false);
+    this.hole2d = new Hole('h2d', '2D', player2Id, 6, false);
+    this.hole2e = new Hole('h2e', '2E', player2Id, 6, false);
+    this.hole2f = new Hole('h2f', '2F', player2Id, 6, false);
+    this.hole2g = new Hole('h2g', '2G', player2Id, 0, true);
 
     this.hole1a.setRelatedHoles(this.hole1b, this.hole2f);
     this.hole1b.setRelatedHoles(this.hole1c, this.hole2e);
@@ -79,14 +92,11 @@ Mancala.prototype.getHole = function (holeId) {
     for (var i in allHoles)
         if (allHoles[i].getId() === holeId)
             return allHoles[i];
-}
-
-Mancala.prototype.getPlayer1 = function () {
-    return this.player1;
 };
 
-Mancala.prototype.getPlayer2 = function () {
-    return this.player2;
+Mancala.prototype.getPlayerScore = function (playerId) {
+    var holeId = playerId === this.player1Id ? 'hole1g' : 'hole2g';
+    return this[holeId].getSeedCount(); 
 };
 
 Mancala.prototype.playerCanPickHole = function (playerId, holeId) {
@@ -107,7 +117,7 @@ Mancala.prototype.robSeedsFromOppositeHole = function (holeId) {
     var hole = this.getHole(holeId);
     var opposite = hole.getOppositeHole();
     var playerId = hole.getPlayerId();
-    var playerKalah = this.getHole(playerId == 'player1' ? 'h1g' : 'h2g');
+    var playerKalah = this.getHole(playerId == this.player1Id ? 'h1g' : 'h2g');
 
     if (opposite.getSeedCount() == 0)
         return;
@@ -116,14 +126,3 @@ Mancala.prototype.robSeedsFromOppositeHole = function (holeId) {
     hole.setSeedCount(0);
     opposite.setSeedCount(0);
 };
-
-Mancala.prototype.arePlayerHolesEmpty = function (playerId) {
-    var holes = this.getAllHoles();
-
-    for (var i in holes) {
-        if (holes[i].getPlayerId() !== playerId) continue;
-        if (!holes[i].isKalah && holes[i].getSeedCount() > 0) return false;
-    }
-
-    return true;
-}

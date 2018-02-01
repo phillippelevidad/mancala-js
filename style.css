@@ -53,3 +53,12 @@
     background-color: tomato;
     color: white;
 }
+
+#endGameInfo {
+    text-align: center;
+    margin-top: 40px;
+}
+
+#endGameInfo .winner {
+    font-size: 36px;    
+}
