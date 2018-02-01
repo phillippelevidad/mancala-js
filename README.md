@@ -1,6 +1,8 @@
 # Mancala Board Game
 A simple implementation of this [wonderful board game](https://en.wikipedia.org/wiki/Mancala).
 
+![Mancala Match](https://image.ibb.co/k3bwOm/mancala_js.gif)
+
 ## Motivation
 I built this as a DDD exercise.
 
